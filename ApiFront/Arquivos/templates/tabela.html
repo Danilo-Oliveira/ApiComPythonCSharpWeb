@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Faisp</title>
+
+    <link rel="icon" type="image/png" href="https://img.icons8.com/dusk/100/000000/admin-settings-male.png">
+
+    <!-- Inicia Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <!-- Fecha Bootstrap -->
+
+    <!-- Inicia Arquivos em CSS -->
+    <link rel="stylesheet" href="../static/content/header-login.css">
+    <link rel="stylesheet" href="../static/content/tabela1.css">
+    <link rel="stylesheet" href="../static/content/menu-side-basic.css">
+    <link rel="stylesheet" href="../static/content/footer.css">
+    <!-- Fecha Arquivos em CSS -->
+
+    <!-- Inicia Chama o arquivo externo jquery. -->
+    <script src="app.js/jquery.js" type='text/javascript' language="javascript"></script>
+    <script type='text/javascript'>
+
+        $(document).ready(function () {
+            $('.char-count').keyup(function () {
+                var maxLength = parseInt($(this).attr('maxlength'));
+                var length = $(this).val().length;
+                var newLength = maxLength - length;
+                var name = $(this).attr('name');
+                $('span[name="' + name + '"]').text(newLength);
+            });
+        });
+    </script>
+    <!-- Fecha Chama o arquivo externo jquery. -->
+</head>
+<!-- Inicia Nav -->
+<header class="header-user-dropdown">
+    <div class="header-limiter">
+        <h1><a href="#"><span class="menu-toggle" data-show-dialog="side-menu-basic"><i
+                        class="fa fa-bars"></i></span></a></h1>
+
+        <div class="header-user-menu">
+            <ul>
+                <li><a href="http://127.0.0.1:8000/loginUsuario" data-id="2">Ja tem conta ?</a></li>
+                </li>
+                <li><a href="http://127.0.0.1:8000/logout" class="nav-link">Logout</a></li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<!-- Fecha Nav -->
+
+<body>
+    <!-- Inicia NavLateral -->
+    <aside class="side-menu-basic">
+        <div class="side-menu-content">
+            <span class="side-menu-logo">Faisp</span>
+            <p>
+                <a href="http://127.0.0.1:8000" data-id="2">Home</a></li>
+                <i class="fa fa-home"></i>
+            </p>
+        </div>
+        <span class="side-menu-close"><i class="fa fa-close"></i></span>
+    </aside>
+    <!-- Fecha NavLateral -->
+
+    <!-- Inicia Conteudo -->
+    <!-- Inicia limeter -->
+    <div class="limiter">
+        <!-- Inicia container-table100 -->
+        <div class="container-table100">
+            <!-- Inicia wrap-table100 -->
+            <div class="wrap-table100">
+                <!-- Inicia table -->
+                <div class="table">
+                    <!-- Inicia Colunas -->
+                    <div class="row header">
+                        <div class="cell">
+                            id
+                        </div>
+
+                        <div class="cell">
+                            Nome
+                        </div>
+                        <div class="cell">
+                            E-mail
+                        </div>
+                        <div class="cell">
+                            Editar
+                        </div>
+                        <div class="cell">
+                            Excluir
+                        </div>
+                    </div>
+                    <!-- /Colunas -->
+
+                    <!-- Inicia Jinja biblioteca -->
+                    {% for n in listando %}
+                    <!-- Inicia row -->
+                    <div class="row">
+
+                        <!-- Inicia Jinja pegando os dados, nome e email -->
+                        <div class="cell" data-title="Full Name">
+                            <td>{{n.id}}</td>
+                        </div>
+                        <div class="cell" data-title="Age">
+                            <td>{{n.name}}</td>
+
+                        </div>
+                        <div class="cell" data-title="Age">
+                            <td>{{n.email}}</td>
+
+                        </div>
+                        <!-- /Jinja pegando os dados, nome e email -->
+
+                        <!-- Inicia cell -->
+                        <div class="cell" data-title="Job Title">
+                            <!-- Inicia Atualizar -->
+                            <td>
+                                <a href="/editarUsuario/{{n.id}}" class="btn btn-dark" data-toggle="modal"
+                                    data-target="#modaledit{{n.id}}">Editar</a>
+                            </td>
+                            <!-- Inicia modal fade -->
+                            <div id="modaledit{{n.id}}" class="modal fade" role="dialog">
+                                <!-- Inicia modal dialog -->
+                                <div class="modal-dialog">
+                                    <!-- Inicia modal content -->
+                                    <div class="modal-content">
+                                        <!-- Inicia Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Menu de Edição</h4>
+                                        </div>
+                                        <!-- /Modal Header -->
+
+                                        <!-- Inicia Modal body -->
+                                        <div class="modal-body">
+                                            <!-- Inicia Formulario -->
+                                            <form action="http://localhost:8000/editarAdmim/" method="POST">
+
+                                                <!-- Inicia Id do usuario -->
+                                                <div class="form-group">
+                                                    <label>ID:</label>
+                                                    <input type="number" name="id" value="{{n.id}}" disabled>
+                                                </div>
+                                                <!-- Fecha Id do usuario -->
+
+                                                <!-- Inicia Nome -->
+                                                <div class="form-group">
+                                                    <label>Nome:</label>
+                                                    <input type="text" class="form-control" name="Name"
+                                                        value="{{n.name}}">
+                                                </div>
+                                                <!-- Fecha Nome -->
+
+                                                <!-- Inicia Email -->
+                                                <div class="form-group">
+                                                    <label>Seu E-mail</label>
+                                                    <input type="email" class="form-control" name="Email"
+                                                        value="{{n.email}}">
+                                                </div>
+                                                <!-- Fecha Email -->
+
+                                                <!-- Inicia form-group -->
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary" type="sbumit">Atualizar</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal">fechar</button>
+                                                </div><!-- Fecha form-group -->
+
+                                            </form><!-- Fecha Formulario -->
+
+                                        </div><!-- Fecha Modal /body -->
+
+                                    </div><!-- Fecha modal content -->
+
+                                </div><!-- Fecha modal dialog -->
+
+                            </div><!-- Fecha modal fade -->
+                            <!-- Fecha Atualizar -->
+
+                        </div><!-- Fecha cell -->
+
+                        <!-- Inicia Delete -->
+                        <td>
+                            <a href="/excluirAdmim/{{ n.id_pessoas }}" class="btn btn-danger btn-xs"
+                                onclick="return confirm('Voce tem certeza que quer deletar?')">Delete</a>
+                        </td>
+                        <!-- Fecha Delete -->
+
+                    </div> <!-- Fecha row -->
+
+                    {% endfor %}
+                    <!-- Fecha Jinja biblioteca -->
+
+                </div><!-- Fecha table -->
+
+            </div><!-- Fecha wrap-table100 -->
+
+        </div><!-- Fecha container-table100 -->
+
+    </div><!-- Fecha limeter -->
+    <!-- Fecha Conteudo -->
+
+    <!-- Inicia Footer -->
+    <footer class="footer-distributed">
+
+        <div class="footer-left">
+            <p class="footer-links">
+                .
+                <span>Danilo Oliveira</span><br>
+                <br>·
+                <span>Rodrigo Oliveira</span><br>
+                <br>·
+                <span>Yuri Pecelin</span><br>
+                <br>·
+                <span>Nilto Mitsui</span><br>
+            </p>
+
+            <p class="footer-company-name">Faculdade Faisp &copy; 2019</p>
+        </div>
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/Danilo-Oliveira?tab=repositories">Danilo-Oliveira</a></p>
+            </div>
+
+            <div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/rockmandr?tab=repositories">RockmaDR</a></p>
+            </div>
+
+            <!--<div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/Danilo-Oliveira?tab=repositories">Danilo-Oliveira</a></p>
+            </div>
+
+            <div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/Danilo-Oliveira?tab=repositories">Danilo-Oliveira</a></p>
+            </div>-->
+        </div>
+
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>Sobre Faculdade Faisp</span>
+                Grupo Educacional que atua desde 2001 na oferta de Cursos Supletivos, Profissionalizantes e também com
+                Graduação e Pós-Graduação. Iniciou as atividades como Polo de Instituções de Ensino, adquirindo a
+                Faculdade FAATESP em meados de 2017.
+            </p>
+    </footer>
+    <!-- Fecha Footer -->
+
+    <!-- Inicia Arquivos em JavaScript -->
+    <script src="../static/scripts/tabela.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Fecha Arquivos em JavaScript -->
+
+    <!-- Inicia SideBar -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        // Making the side menu work
+        $(document).ready(function () {
+
+            $('.menu-toggle').click(function (e) {
+
+                var menu = $(this).data('show-dialog');
+
+                $('.' + menu).toggleClass('side-menu-shown');
+
+            });
+
+            $('.side-menu-close').on('click', function () {
+                $('.side-menu-basic').removeClass('side-menu-shown');
+            });
+        });
+    </script>
+    <!-- Fecha SideBar -->
+</body>
+
+</html>

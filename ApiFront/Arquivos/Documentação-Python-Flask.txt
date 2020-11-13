@@ -1,0 +1,65 @@
+#--------------------------------------------------------------------------------------#
+# TODAS AS INFORMAÇÕES QUE ESTÃO NESSA EXPLICAÇÃO FOI BASEADO NO SITE EU AGRADEÇO MUUITO A AJUDA DELES OU DELE SEGUE O SITE ABAIXO: 
+# http://pythonclub.com.br/what-the-flask-pt-1-introducao-ao-desenvolvimento-web-com-python.html#o_objeto_request_acessando_dados_via_get_e_post
+#
+#  Segue aqui a descrição do codigo e o que ele faz. 
+#
+
+# Bom basicamente usamos nesse pequeno projeto as liguaguem Python com o micro-Framework Flask e Sql Server
+# para criar um CRUD na Web. Segue abaixo as descrição que linha de codigo faz.
+#
+
+# | import pyodbc | Ele importa um método de acesso ao Banco de Dados 
+# com a finalidade de tornar possível acessar qualquer dado de qualquer aplicação independentemente do Banco de Dados utilizado.
+#
+
+# | from flask import flask | Ele importa uma biblioteca do micro-framework onde iremos ter conexao com a Web.
+# | render_template | E uma função que recebe como parâmetros o nome do template.
+# | request | Ele carrega dados referentes a cada requisição HTTP.
+# 
+
+# | app = Flask(__name__) | A classe Flask pode receber alguns parâmetros para instanciar o objeto app mas geralmente 
+# passamos apenas o import_name que deve ser o nome exato do pacote onde o app está definido. 
+# Você pode usar a variável __name__ para pegar este valor dinâmicamente e você verá muitos exemplos assim, 
+# porém saiba desde já que isto não é uma boa prática.
+#
+
+# | @app.route('/') | É um decorator responsável por interpretar a rota que acessamos, então assim que é acessada a url / a função que está abaixo é responsável por enviar uma rota ao navegador.
+#
+
+# | def student(): |
+# | return render_template('formulario.html') | É a função que tem como objetivo retornar somente um html.
+#
+
+# | POST | Ele é normalmente usado quando se faz o upload de um arquivo ou envia-se um formulário web completo.
+#
+
+# | GET | O método GET é usado para passar informações de uma página para outra usando a URL como meio. 
+#
+
+# | request.form | Ele intercepta apenas os argumentos passados via POST, PUT ou PATCH, ou seja, via formulário ou payload.
+# | name = request.form['Name'] | 
+# | nascimento = request.form['Nascimento'] |
+# | idade = request.form['Idade'] |
+# | genero = request.form['Genero'] |
+# | email = request.form['Email'] |
+# | objetivo = request.form['Objetivo'] |
+# As palavras em ' '(aspas simples) são informações passadas do html para o python onde são armazenadas pelas variaveis do python.
+#
+
+# | server = 'DESKTOP-RBIFR2M\SS17'"| Faz a conexao com o Sql Server.
+# | database = 'Formulario' | Faz a conexao com a Database.
+#
+
+# | cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';Trusted_Connection=yes;') |
+# o cnxn e uma variavel onde recebe o pyodbc.connect. O pyodbc e um drive onde ele se conecta com Sql Server, esse drive
+# pode ser baixado no site da microsoft.
+#
+
+# | cursor | Um cursor de banco de dados é uma estrutura de controle que permite percorrer sobre os registros em um banco de dados.
+# | cursor.execute | execute, uma instrução SQL retornando o próprio objeto Cursor.
+# | cursor.commit | Este método envia uma instrução COMMIT para o servidor Sql Server.
+# | cursor.close | O método close () fecha o uma aplicação. 
+#
+
+#

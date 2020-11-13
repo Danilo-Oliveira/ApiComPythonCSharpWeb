@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <img src="">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/windows/64/000000/gender-neutral-user.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="../static/content/login.css">
+</head>
+
+<body>
+    <!-- Start Main Container -->
+    <div class="main-container">
+        <!-- Start Pokemon Ball Top Part -->
+        <div class="pokemon-top-part"></div>
+        <!-- End Pokemon Ball Top Part -->
+        <!-- Start Main Forms -->
+        <div class="main-forms">
+            <div class="signup-form">
+                <form class="sign-back" action="/login" method="POST">
+                    <h1>sign UP</h1>
+                    <div class="signup-row">
+                        <i class="fa fa-envelope-o"></i>
+                        <input type="text" name="email" placeholder="EMAIL">
+                    </div>
+                    <div class="signup-row">
+                        <i class="fa fa-key"></i>
+                        <input type="password" name="password" placeholder="PASSWORD">
+                    </div>
+                    <div class="signup-row">
+                        <button href="http://127.0.0.1:8000/meuPerfil" class="btn btn-outline-dark signup-row" >
+                            Login
+                        </button>
+                    </div>
+                    <div class="form-bottom">
+                        <div class="remember">
+                            <input type="checkbox" name="" value="">
+                            <span>Remember</span>
+                        </div>
+                        <div class="remember">
+                            <a href="http://127.0.0.1:8000/">Não tem conta cadastra-se ?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- End Main Forms -->
+        <!-- Start Pokemon Ball Bottom Part -->
+        <div class="pokemon-bottom-part">
+            <div class="white-part"></div>
+            <div class="black-line"></div>
+        </div>
+        <!-- End Pokemon Ball Bottom Part -->
+    </div>
+    <!-- End Main Container -->
+    <!-- Start Scripts -->
+    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <script src="https://use.fontawesome.com/7dddae9ad9.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/pokemon.js"></script>
+    <!-- End Scripts -->
+</body>
+
+</html>

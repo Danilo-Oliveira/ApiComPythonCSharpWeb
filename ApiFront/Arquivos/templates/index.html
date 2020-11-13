@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+
+	<title>Bem-Vindo a Faisp</title>
+
+	<link rel="icon" type="image/png" href="https://img.icons8.com/cool-color/64/000000/enter-2.png">
+
+	<!-- Inicia Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+	<!-- Fecha Bootstrap-->
+
+	<!-- Inicia Arquivos em CSS-->
+	<link rel="stylesheet" type="text/css" href="../static/content/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="../static/content/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../static/content/formulario.css" />
+	<link rel="stylesheet" type="text/css" href="../static/content/component.css" />
+	<link rel="stylesheet" type="text/css" href="../static/content/cs-select.css" />
+	<link rel="stylesheet" type="text/css" href="../static/content/cs-skin-boxes.css" />
+	<link rel="stylesheet" href="../static/content/header-login.css">
+	<link rel="stylesheet" href="../static/content/menu-side-basic.css">
+	<link rel="stylesheet" href="../static/content/footer.css">
+	<!-- Fecha Arquivos em CSS-->
+
+	<!-- Inicia Chama o arquivo externo jquery. -->
+	<script src="app.js/jquery.js" type='text/javascript' language="javascript"></script>
+	<script type='text/javascript'>
+
+		$(document).ready(function () {
+			$('.char-count').keyup(function () {
+				var maxLength = parseInt($(this).attr('maxlength'));
+				var length = $(this).val().length;
+				var newLength = maxLength - length;
+				var name = $(this).attr('name');
+				$('span[name="' + name + '"]').text(newLength);
+			});
+		});
+	</script>
+	<!-- Fecha Chama o arquivo externo jquery. -->
+
+</head>
+<!-- Inicia Nav -->
+<header class="header-user-dropdown">
+	<div class="header-limiter">
+		<h1><a href="#"><span class="menu-toggle" data-show-dialog="side-menu-basic"><i
+						class="fa fa-bars"></i></span></a></h1>
+		<div class="header-user-menu">
+			<img src="https://img.icons8.com/windows/64/000000/gender-neutral-user.png">
+			<ul>
+				<li><a href="http://127.0.0.1:8000/loginUsuario" data-id="2">Ja tem conta ?</a></li>
+				</li>
+				<li><a href="http://127.0.0.1:8000/logout" class="nav-link">Logout</a></li>
+				</li>
+			</ul>
+		</div>
+	</div>
+</header>
+<!-- Fecha Nav -->
+
+<body>
+	<!-- Inicia NavLateral -->
+	<aside class="side-menu-basic">
+		<div class="side-menu-content">
+			<span class="side-menu-logo">Faisp</span>
+			<p>
+				<a href="http://127.0.0.1:8000/loginUsuario" data-id="2">Meu Perfil</a></li>
+				<i class="fa fa-user"></i>
+			</p>
+			<p>
+				<a href="http://127.0.0.1:8000/list" data-id="3">Administrador</a></li>
+				<i class="fa fa-user"></i>
+			</p>
+		</div>
+		<span class="side-menu-close"><i class="fa fa-close"></i></span>
+	</aside>
+	<!-- Fecha NavLateral -->
+
+	<!-- Inicia Conteudo e o Cadastro -->
+	<div class="container">
+		<div class="fs-form-wrap" id="fs-form-wrap">
+			<!-- Inicia Conexão com o servidor Flask -->
+			<form id="myform" class="fs-form fs-form-full" autocomplete="off" action="http://localhost:8000/cadastro"
+				method="POST">
+				<!-- Fecha Conexão com o servidor Flask -->
+
+				<ol class="fs-fields">
+					<!-- Inicia Nome -->
+					<li>
+						<label class="fs-field-label fs-anim-upper" for="q1">Qual e o seu nome ?</label>
+						<input class="fs-anim-lower" id="q1" name="Name" type="text" pattern="[A-Za-zÀ-ú., -]{5,}"
+							title="Campo nome não aceita números" placeholder="Amanda Nunes" required />
+					</li>
+					<!-- Fecha Nome -->
+
+					<!-- Inicia Email -->
+					<li>
+						<label class="fs-field-label fs-anim-upper" for="q5">Qual e o seu email ?</label>
+						<input class="fs-anim-lower" id="q5" name="Email" type="email" pattern="(?=.*[a-z].{1,}"
+							placeholder="qualquer@quaquer" required />
+					</li>
+					<!-- FEcha Email -->
+
+				</ol><!-- Fecha fs-fields -->
+
+				<!-- Inicia Confirmação dos dados -->
+				<button type="button" class="fs-submit" data-toggle="modal" onclick="setConfirmException();"
+					data-target="#myModal">
+					Confirmar informações
+				</button>
+				<!-- Fecha Confirmação dos dados -->
+
+				<!-- Inicia Cancel -->
+				<a href="http://127.0.0.1:8000/loginUsuario" class="fs-submit" id="cancel" name="cancel">Cancel</a>
+				<!-- Fecha Cancel -->
+
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<!-- Inicia Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title">Obrigado!!</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<!-- Fecha modal-header -->
+
+							<!-- Inicia Modal body -->
+							<div class="modal-body">
+								<h3>Clique em salvar para cadastrar</h3>
+							</div>
+							<!-- Fecha modal-body -->
+
+							<!-- Inicia Modal footer -->
+							<div class="modal-footer">
+								<button type="button" class="fs-submit" data-dismiss="modal">Fechar</button>
+								<button type="submit" class="fs-submit">Salvar</button>
+							</div>
+							<!-- Fecha modal-footer -->
+						</div>
+						<!-- Fecha modal-content -->
+					</div>
+					<!-- Fecha modal-dialog -->
+				</div>
+				<!-- Fecha modal -->
+			</form>
+			<!-- Fecha fs-form -->
+		</div>
+		<!-- Fecha fs-form-wrap -->
+	</div>
+	<!-- Fecha Conteudo e o Cadastro -->
+
+	<!-- Inicia Arquivos em JavaScript e do Booststrap -->
+	<script src="../static/scripts/modernizr.custom.js"></script>
+	<script src="../static/scripts/classie.js"></script>
+	<script src="../static/scripts/selectFx.js"></script>
+	<script src="../static/scripts/fullscreenForm.js"></script>
+	<script src="../static/scripts/formulario.js"></script>
+	<!-- Fecha Arquivos em JavaScript e do Booststrap -->
+
+	<!-- Inicia SideBar -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<script>
+		// Making the side menu work
+		$(document).ready(function () {
+
+			$('.menu-toggle').click(function (e) {
+
+				var menu = $(this).data('show-dialog');
+
+				$('.' + menu).toggleClass('side-menu-shown');
+
+			});
+
+			$('.side-menu-close').on('click', function () {
+				$('.side-menu-basic').removeClass('side-menu-shown');
+			});
+		});
+	</script>
+	<!-- Fecha SideBar -->
+</body>
+
+</html>

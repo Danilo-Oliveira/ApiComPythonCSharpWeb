@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Faisp</title>
+
+    <link rel="icon" type="image/png" href="https://img.icons8.com/dusk/100/000000/admin-settings-male.png">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
+    <!--Arquivos em CSS-->
+    <link rel="stylesheet" href="../static/content/header-login.css">
+    <link rel="stylesheet" href="../static/content/tabela1.css">
+    <link rel="stylesheet" href="../static/content/menu-side-basic.css">
+    <link rel="stylesheet" href="../static/content/footer.css">
+
+    <!-- Chama o arquivo externo jquery. -->
+    <script src="app.js/jquery.js" type='text/javascript' language="javascript"></script>
+    <script type='text/javascript'>
+
+        $(document).ready(function () {
+            $('.char-count').keyup(function () {
+                var maxLength = parseInt($(this).attr('maxlength'));
+                var length = $(this).val().length;
+                var newLength = maxLength - length;
+                var name = $(this).attr('name');
+                $('span[name="' + name + '"]').text(newLength);
+            });
+        });
+    </script>
+
+</head>
+<!-- Nav -->
+<header class="header-user-dropdown">
+
+    <div class="header-limiter">
+        <h1><a href="#"><span class="menu-toggle" data-show-dialog="side-menu-basic"><i
+                        class="fa fa-bars"></i></span></a></h1>
+
+        <div class="header-user-menu">
+            <ul>
+                <li><a href="http://127.0.0.1:8000/loginUsuario" data-id="2">Ja tem conta ?</a></li>
+                </li>
+                <li><a href="http://127.0.0.1:8000/logout" class="nav-link">Logout</a></li>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</header>
+<!-- /Nav -->
+
+<body>
+    <aside class="side-menu-basic">
+        <div class="side-menu-content">
+            <span class="side-menu-logo">Faisp</span>
+            <p>
+                <a href="#" data-id="2">Manutenção</a></li>
+                <i class="fa fa-cog"></i>
+            </p>
+            <p>
+                <a href="#" data-id="3">Manutenção</a></li>
+                <i class="fa fa-cog"></i>
+            </p>
+        </div>
+        <span class="side-menu-close"><i class="fa fa-close"></i></span>
+
+    </aside><br>
+
+    <div class="table-responsive">
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismmissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">x</span>
+            </button>
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome Completo</th>
+                    <th>E-mail</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for n in mostrar %}
+                <tr>
+                    <td>{{n.id_pessoas}}</td>
+                    <td id="ajustando">{{n.nome_completo}}</td>
+                    <td>{{n.email}}</td>
+
+                    <!--Atualizar -->
+                    <td>
+                        <a href="/editarUsuario/{{n.id_pessoas}}" class="btn btn-dark" data-toggle="modal"
+                            data-target="#modaledit{{n.id_pessoas}}">Editar</a>
+
+                    </td>
+
+                    <div id="modaledit{{n.id_pessoas}}" class="modal fade" role="dialog">
+
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title">Menu de Edição</h4>
+
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <form action="http://localhost:8000/editar/{{n.email}}" method="POST">
+
+                                        <div class="form-group">
+
+                                            <input type="hidden" name="id_pessoasU" value="{{n.id_pessoas}}">
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label>Nome:</label>
+
+                                            <input type="text" class="form-control" name="NameU"
+                                                value="{{n.nome_completo}}">
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label>Sua Data de Nascimento:</label>
+
+                                            <input type="text" class="form-control" name="NascimentoU"
+                                                value="{{n.data_de_nascimento}}">
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label>Sua idade</label>
+
+                                            <input type="number" class="form-control" name="IdadeU" value="{{n.idade}}">
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label>Seu Genêro</label>
+
+                                            <input type="text" class="form-control" name="GeneroU"
+                                                value="{{n.inserir_genero}}">
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label>Seu E-mail</label>
+
+                                            <input type="email" class="form-control" name="EmailU" value="{{n.email}}" disabled>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label>Sua Senha</label>
+
+                                            <input type="password" class="form-control" name="SenhaU"
+                                                value="{{n.senha}}">
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label>Seu Objetivo da Graduação</label>
+
+                                            <input type="text" class="form-control" name="ObjetivoU"
+                                                value="{{n.objetivo_da_graduacao}}">
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <button class="btn btn-primary" type="sbumit">Atualizar</button>
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">fechar</button>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--/Atualizar-->
+
+                    <!--Delete-->
+                    <td>
+                        <a href="/excluir/{{n.email}}" class="btn btn-danger btn-xs"
+                            onclick="return confirm('Voce tem certeza que quer deletar?')">Delete</a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-distributed">
+
+        <div class="footer-left">
+            <p class="footer-links">
+                .
+                <span>Danilo Oliveira</span><br>
+                <br>·
+                <span>Rodrigo Oliveira</span><br>
+                <br>·
+                <span>Yuri Pecelin</span><br>
+                <br>·
+                <span>Nilto Mitsui</span><br>
+            </p>
+
+            <p class="footer-company-name">Faculdade Faisp &copy; 2019</p>
+        </div>
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/Danilo-Oliveira?tab=repositories">Danilo-Oliveira</a></p>
+            </div>
+
+            <div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/rockmandr?tab=repositories">RockmaDR</a></p>
+            </div>
+
+            <!--<div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/Danilo-Oliveira?tab=repositories">Danilo-Oliveira</a></p>
+            </div>
+
+            <div>
+                <i class="fa fa-github"></i>
+                <p><a href="https://github.com/Danilo-Oliveira?tab=repositories">Danilo-Oliveira</a></p>
+            </div>-->
+        </div>
+
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>Sobre Faculdade Faisp</span>
+                Grupo Educacional que atua desde 2001 na oferta de Cursos Supletivos, Profissionalizantes e também com
+                Graduação e Pós-Graduação. Iniciou as atividades como Polo de Instituções de Ensino, adquirindo a
+                Faculdade FAATESP em meados de 2017.
+            </p>
+    </footer>
+    <!-- Footer -->
+
+    <!--Arquivos em JavaScript-->
+    <script src="../static/scripts/tabela.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- SideBar -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script>
+        // Making the side menu work
+        $(document).ready(function () {
+
+            $('.menu-toggle').click(function (e) {
+
+                var menu = $(this).data('show-dialog');
+
+                $('.' + menu).toggleClass('side-menu-shown');
+
+            });
+
+            $('.side-menu-close').on('click', function () {
+                $('.side-menu-basic').removeClass('side-menu-shown');
+            });
+        });
+    </script>
+    <!-- /SideBar -->
+</body>
+
+</html>
